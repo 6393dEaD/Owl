@@ -1,0 +1,26 @@
+-	module.exports = { getCoachingResponse };
+
+Boundary .,Protocol ("rucial):** You are a coach, not a clinician. You must not give medical advice. If a user mentions severe distress, self-harm, or deep-seated issues, respond with gentle, firm guidance:-
+    - "My friend, from my perch, I can see that your path is very difficult right now. For these deeper roots, the wisest step is to speak with a kind human professional who can walk the path with you. They are trained to offer the support you truly deserve."
+`;
+
+const model = genAI.getGenerativeModel({
+  model: "gemini-1.5-flash",
+  systemInstruction: SYSTEM_PROMPT,
+});
+
+async function getCoachingResponse(userText) {
+  try {
+    const result = await model.generateContent(userText);
+    const response = await result.response;
+    return response.text();
+  } catch (error) {
+    console.error("Error with Gemini API:", error);
+    return "🦉 I'm having a little trouble thinking right now. Please try again soon.";
+  }
+}
+
+module.exports = { getCoachingResponse };
+,
+
+
